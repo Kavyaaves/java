@@ -18,7 +18,6 @@ public class ExceptionHandling {
         }
     }
 
-    // global method
     public void handleOutOfMemoryError(){
         try{
             // Objects are in heap so heap memory gets full
