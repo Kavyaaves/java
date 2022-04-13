@@ -47,9 +47,11 @@ public class Quiz {
         this.questions = q;
     }
 
-    public void handleStackOverflowError(Scanner sc){
+    public void countOptions(){
+        int count=0;
         try{
-            this.handleStackOverflowError(sc);
+            count+=4;
+            countOptions();
         }catch(StackOverflowError er){
             System.out.println("Stack Overflow");
         }
@@ -117,7 +119,7 @@ public class Quiz {
         Quiz quiz = new Quiz();
         System.out.println("Quiz time starts from now");
         quiz.createQuestionsSet();
-        quiz.handleStackOverflowError(sc);
+        quiz.countOptions();
         quiz.start(sc);
         quiz.pushAnsToStack();;
         sc.close();
