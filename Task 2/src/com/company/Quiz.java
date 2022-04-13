@@ -1,52 +1,49 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 public class Quiz {
-    public Questions questions[];
+    public ArrayList<Questions> questions;
     public ArrayList<Integer> selected=new ArrayList<Integer>();
-    public ArrayList<Integer> answers=new ArrayList<Integer>();
 
     public void createQuestionsSet(){
-        ArrayList<String> op1 = new ArrayList<String>();
-        op1.add("final");
-        op1.add("static");
-        op1.add("catch");
-        op1.add("global");
+        HashMap<Integer, String> op1 = new HashMap<Integer, String>();
+        op1.put(1, "final");
+        op1.put(2, "static");
+        op1.put(3, "catch");
+        op1.put(4, "global");
 
-        ArrayList<String> op2 = new ArrayList<String>();
-        op2.add("default");
-        op2.add("public");
-        op2.add("private");
-        op2.add("protected");
+        HashMap<Integer,String> op2 = new HashMap<Integer,String>();
+        op2.put(1, "default");
+        op2.put(2, "public");
+        op2.put(3, "private");
+        op2.put(4, "protected");
 
-        ArrayList<String> op3 = new ArrayList<String>();
-        op3.add("throw");
-        op3.add("catch");
-        op3.add("final");
-        op3.add("throws");
+        HashMap<Integer,String> op3 = new HashMap<Integer,String>();
+        op3.put(1,"throw");
+        op3.put(2,"catch");
+        op3.put(3,"final");
+        op3.put(4,"throws");
 
-        ArrayList<String> op4 = new ArrayList<String>();
-        op4.add("JRE");
-        op4.add("JDK");
-        op4.add("JAVAC");
-        op4.add("JVM");
+        HashMap<Integer,String> op4 = new HashMap<Integer,String>();
+        op4.put(1,"JRE");
+        op4.put(2,"JDK");
+        op4.put(3,"JAVAC");
+        op4.put(4,"JVM");
 
-        ArrayList<String> op5 = new ArrayList<String>();
-        op5.add("extends");
-        op5.add("instanceof");
-        op5.add("then");
-        op5.add("switch");
+        HashMap<Integer,String> op5 = new HashMap<Integer,String>();
+        op5.put(1,"extends");
+        op5.put(2,"instanceof");
+        op5.put(3,"then");
+        op5.put(4,"switch");
 
-        Questions q[] = {
-                new Questions("Which keyword is used to prevent reinitialization? ", op1, 1),
-                new Questions("Which access modifier allows access only inside the class? ", op2, 3),
-                new Questions("Exceptions created in try block are caught in which block? ", op3, 2),
-                new Questions("Which provides runtime environment for java byte code to be executed? ", op4, 4),
-                new Questions("Which of the following are not Java keywords? ", op5, 3)
-        };
+        ArrayList<Questions> q= new ArrayList<Questions>();
+
+        q.add(new Questions("Which keyword is used to prevent reinitialization? ", op1, 1));
+        q.add(new Questions("Which access modifier allows access only inside the class? ", op2, 3));
+        q.add(new Questions("Exceptions created in try block are caught in which block? ", op3, 2));
+        q.add(new Questions("Which provides runtime environment for java byte code to be executed? ", op4, 4));
+        q.add( new Questions("Which of the following are not Java keywords? ", op5, 3));
         this.questions = q;
     }
 
@@ -58,15 +55,20 @@ public class Quiz {
         }
     }
     public int getInput(Scanner sc){
-        System.out.print("Your Answer: ");
-        int ans = sc.nextInt();
-        if(ans > 0 && ans < 5){
-            this.selected.add(ans);
-        }else{
-            System.out.println("Enter a valid option");
-            getInput(sc);
+        try{
+            System.out.print("Your Answer: ");
+            int ans = sc.nextInt();
+            if(ans > 0 && ans < 5){
+                this.selected.add(ans);
+            }else{
+                System.out.println("Enter a valid option");
+                getInput(sc);
+            }
+            return ans;
+        }catch(StackOverflowError er){
+             System.out.println("Stack Overflow");
+             return 0;
         }
-        return ans;
     }
     public void handleOutOfMemoryError(){
         try{
@@ -86,29 +88,26 @@ public class Quiz {
         int i = 0;
         int score = 0;
         System.out.println("\n============================================\n");
-        for(Questions each:this.questions){
+        for(Questions each:this.questions) {
             System.out.println(each.getQuestion());
-            int option=1;
-            for(String opt : each.getOptions()){
-                System.out.println(option+". "+ opt);
-                option+=1;
+            for (Map.Entry opt : each.getOptions().entrySet()) {
+                System.out.println(opt.getKey() + ". " + opt.getValue());
             }
             this.getInput(sc);
             int crt = each.getAns();
-            if(crt == this.selected.get(i)){
-                score+=1;
-            }else{
-                score-=1;
+            if (crt == this.selected.get(i)) {
+                score += 1;
             }
             System.out.println("Your current score is: "+score);
+            System.out.println("Correct Answer: "+ (each.getAns()) +". "+ each.getOptions().get(each.getAns()));
             System.out.println("\n============================================\n");
+        }
+
             System.out.println("Quiz Ended\nFinal Score: " + score);
             System.out.println("\n============================================\n");
             i+=1;
-        }
-
-
     }
+
     public static void main(String args[]){
         Scanner sc = new Scanner(System.in);
         Quiz quiz = new Quiz();
