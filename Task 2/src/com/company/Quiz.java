@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Quiz {
     public ArrayList<Questions> questions;
-    public ArrayList<Integer> selected=new ArrayList<Integer>();
+    public Stack selected=new Stack<Integer>();
 
     public void createQuestionsSet(){
         HashMap<Integer, String> op1 = new HashMap<Integer, String>();
@@ -58,8 +58,9 @@ public class Quiz {
         try{
             System.out.print("Your Answer: ");
             int ans = sc.nextInt();
+
             if(ans > 0 && ans < 5){
-                this.selected.add(ans);
+                this.selected.push(ans);
             }else{
                 System.out.println("Enter a valid option");
                 getInput(sc);
@@ -70,11 +71,13 @@ public class Quiz {
              return 0;
         }
     }
-    public void handleOutOfMemoryError(){
-        try{
+    public void pushAnsToStack(){
+        try {
             Stack stack = new Stack();
-            while(true){
-                stack.push(this.selected);
+            while (true) {
+                for (Object elem : this.selected) {
+                    stack.push(elem);
+                }
             }
         }catch(OutOfMemoryError err){
             System.out.println("Out of Memory Error");
@@ -94,8 +97,9 @@ public class Quiz {
                 System.out.println(opt.getKey() + ". " + opt.getValue());
             }
             this.getInput(sc);
+
             int crt = each.getAns();
-            if (crt == this.selected.get(i)) {
+            if (crt == (int)this.selected.peek()) {
                 score += 1;
             }
             System.out.println("Your current score is: "+score);
@@ -115,7 +119,7 @@ public class Quiz {
         quiz.createQuestionsSet();
         quiz.handleStackOverflowError(sc);
         quiz.start(sc);
-        quiz.handleOutOfMemoryError();;
+        quiz.pushAnsToStack();;
         sc.close();
     }
 }
