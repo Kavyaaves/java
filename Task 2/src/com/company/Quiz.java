@@ -45,10 +45,10 @@ public class Quiz {
         q.add(new Questions("Which provides runtime environment for java byte code to be executed? ", op4, 4));
         q.add( new Questions("Which of the following are not Java keywords? ", op5, 3));
         this.questions = q;
-    }
+        }
 
     public void countOptions(){
-        int count=0;
+        int count = 0;
         try{
             count+=4;
             countOptions();
@@ -83,10 +83,9 @@ public class Quiz {
             }
         }catch(OutOfMemoryError err){
             System.out.println("Out of Memory Error");
-        }finally{
+        } finally{
             System.out.println("Finally block of Out of Memory");
         }
-
     }
 
     public void start(Scanner sc){
