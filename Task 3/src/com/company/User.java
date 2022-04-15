@@ -1,7 +1,5 @@
 package com.company;
 
-import java.util.ArrayList;
-
 public class User {
     public static int id = 4;
     public String username;

@@ -1,6 +1,5 @@
 package com.company;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class School {
@@ -75,7 +74,7 @@ public class School {
         }
     }
 
-    void manageRoles(Login auth, Scanner sc){
+    private void manageRoles(Login auth, Scanner sc){
         User curr = auth.currentUser;
         Data data = new Data();
         if(curr.role == Role.ADMIN){
@@ -87,7 +86,7 @@ public class School {
         }
     }
 
-    void login(Scanner sc){
+    private void login(Scanner sc){
         Login login = new Login();
         boolean loggedIn = login.loginUser(sc);
         if(loggedIn){
@@ -97,6 +96,7 @@ public class School {
             login(sc);
         }
     }
+
     public static void main(String[] args) {
         School school = new School();
         Scanner sc = new Scanner(System.in);

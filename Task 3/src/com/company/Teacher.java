@@ -6,7 +6,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Teacher {
+
     public HashMap<Integer, User> myStudents;
+
     public void getMyStudents(User teacher){
         Data d = new Data();
         HashMap<Integer, User> studentsArr = new HashMap<>();

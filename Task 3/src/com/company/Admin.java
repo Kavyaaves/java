@@ -6,8 +6,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Admin {
-    HashMap<Integer, User> hm = new HashMap<>();
-    private Role getRole(Scanner sc) throws IllegalArgumentException {
+    public HashMap<Integer, User> hm = new HashMap<>();
+    protected Role getRole(Scanner sc) throws IllegalArgumentException {
         System.out.println("Role: ");
         String role = sc.next();
 
@@ -15,7 +15,7 @@ public class Admin {
         return r;
     }
 
-   void addUser(Scanner sc, Data data, boolean update, Integer id){
+    protected void addUser(Scanner sc, Data data, boolean update, Integer id){
        try{
            System.out.println("Username: ");
            String username = sc.next();
@@ -44,7 +44,7 @@ public class Admin {
        }
    }
 
-   void updateUser(Scanner sc, Data data){
+    protected void updateUser(Scanner sc, Data data){
         try{
             System.out.print("ID of the entry to be updated: ");
             int id = sc.nextInt();
@@ -56,7 +56,7 @@ public class Admin {
 
    }
 
-    void deleteUser(Scanner sc, Data data){
+    protected void deleteUser(Scanner sc, Data data){
         try{
             System.out.print("ID of th entry to be deleted: ");
             Integer username = sc.nextInt();

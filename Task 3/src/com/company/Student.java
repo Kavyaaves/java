@@ -24,13 +24,4 @@ public class Student {
             }
         }
     }
-
-    public void display(){
-        System.out.format("%15s%15s%15s\n", "ID","Username","Standard", "Marks");
-        for(Map.Entry<Integer, User> user: this.students.entrySet()){
-            System.out.format("%15s%15s%15s\n", user.getValue().username, user.getValue().std, user.getValue().role, user.getValue().marks);
-        }
-    }
-
-
 }
