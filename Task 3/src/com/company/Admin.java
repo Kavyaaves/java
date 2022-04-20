@@ -42,7 +42,7 @@ public class Admin {
            System.out.println("Please enter a valid input");
            this.addUser(sc, data, update, id);
        }
-   }
+    }
 
     protected void updateUser(Scanner sc, Data data){
         try{
