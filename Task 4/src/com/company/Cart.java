@@ -24,14 +24,19 @@ public class Cart extends Products{
         return this.cart;
     }
 
-    public void removeFromCart(Integer id){
+    public String removeFromCart(Integer id){
         Product p = getProductById(id);
-        this.cart.remove(p);
+        if(p == null){
+            return "No item in cart matches the ID";
+        }else{
+            this.cart.remove(p);
+            return "Item removed from cart successfully";
+        }
     }
 
     public void displayCartProducts(){
         System.out.println("\n==================================================================\n");
-        System.out.format("%5s%15s%15s%10s%10s%15s\n", "ID", "NAME", "CATEGORY", "AMOUNT", "QTY", "TOTAL AMOUNT");
+        System.out.format("%5s%15s%10s%10s%15s\n", "ID", "NAME", "AMOUNT", "QTY", "TOTAL AMOUNT");
         for(Product p: this.cart){
             p.displayProduct(p);
         }

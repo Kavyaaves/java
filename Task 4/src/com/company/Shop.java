@@ -6,11 +6,12 @@ import java.util.Scanner;
 public class Shop extends Products {
     Customer currUser;
     Customers customers;
-
+    HistoryTable historyTable;
     Shop(){}
-    Shop(Customer customer, Customers customers){
+    Shop(Customer customer, Customers customers, HistoryTable historyTable){
         this.customers = customers;
         this.currUser = customer;
+        this.historyTable = historyTable;
     }
 
     public void proceed(Scanner sc){
@@ -45,8 +46,13 @@ public class Shop extends Products {
         }
     }
 
+    public boolean checkCart(Cart cart){
+        if(cart.getAllCartProducts().size() > 0) return true;
+        return false;
+    }
+
     void shop(Cart cart, Scanner sc){
-        System.out.println("1. Add to cart\n2. Remove from cart\n3. View Cart\n4. Checkout\n");
+        System.out.println("1. Add to cart\n2. Remove from cart\n3. View Cart\n4. Checkout\n5. View Orders\n6. View Products\n7. Logout");
         int op = sc.nextInt();
         switch(op){
             case 1:
@@ -57,7 +63,8 @@ public class Shop extends Products {
                 break;
             case 2:
                 Integer i = this.getProductId(sc);
-                cart.removeFromCart(i);
+                String response = cart.removeFromCart(i);
+                System.out.println(response);
                 this.shop(cart, sc);
                 break;
             case 3:
@@ -65,13 +72,29 @@ public class Shop extends Products {
                 this.shop(cart, sc);
                 break;
             case 4:
-                Checkout checkout = new Checkout();
-                checkout.checkoutBill(currUser,cart, this.customers);
+                boolean hasProducts =  checkCart(cart);
+                if(hasProducts) {
+                    Checkout checkout = new Checkout();
+                    checkout.checkoutBill(currUser, cart, this.customers, this.historyTable);
+                }else{
+                    System.out.println("Could not proceed with checkout since your cart is empty");
+                }
                 this.shop(cart, sc);
                 break;
             case 5:
-               Auth auth = new Auth();
-               auth.handleAuth(sc, customers);
+                historyTable.displayHistoryTable();
+                this.shop(cart, sc);
+                break;
+            case 6:
+                System.out.println("\n================================================\n");
+                this.displayProducts();
+                System.out.println("\n================================================\n");
+                this.shop(cart, sc);
+                break;
+            case 7:
+               Store store = new Store();
+               store.handleAuth(sc, customers, this.historyTable);
+               break;
             default:
                 this.shop(cart, sc);
                 return;

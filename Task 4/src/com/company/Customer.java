@@ -5,8 +5,8 @@ public class Customer {
     public String custName;
     public Long phoneNum;
     public String address;
-    public History history;
 
+    Customer(){}
     Customer(Integer custId, String custName,Long phoneNum,String address){
         this.custId = custId;
         this.custName = custName;

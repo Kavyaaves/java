@@ -31,7 +31,6 @@ public class Details {
     public Customer getCustDetails(Scanner sc){
         System.out.print("Enter your details:\nName: ");
         String custName = getNextLine(sc);
-
         System.out.print("Phone Number: ");
         Long phoneNum = getNextLong(sc);
         System.out.print("Address: ");

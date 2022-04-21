@@ -3,8 +3,11 @@ package com.company;
 import java.util.ArrayList;
 
 public class Customers {
+
     ArrayList<Customer> customers;
     Customer currUser;
+
+    Customers(){};
 
     public void createCustomers(){
         ArrayList<Customer> customers = new ArrayList<>();
