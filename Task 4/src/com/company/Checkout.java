@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class Checkout extends Cart  {
 
-    Customer currUser;
-    ArrayList<Product> cart;
-    Customers customers;
-    HistoryTable historyTable;
-    Double totalPaid = 0.0;
+    private Customer currUser;
+    private ArrayList<Product> cart;
+    private Customers customers;
+    private HistoryTable historyTable;
+    private Double totalPaid = 0.0;
 
     public void checkoutBill(Customer currUser, Cart cart, Customers customers, HistoryTable historyTable){
         this.customers = customers;
@@ -67,9 +67,8 @@ public class Checkout extends Cart  {
         }
     }
 
-    public Float calculateAmount() {
-        Float amount = Float.valueOf(0);
-
+    public Double calculateAmount() {
+        Double amount = 0.0;
         for (Product p : this.cart) {
             amount += (p.price * p.quantity);
         }

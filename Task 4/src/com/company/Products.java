@@ -3,8 +3,8 @@ package com.company;
 import java.util.ArrayList;
 import java.util.EnumSet;
 
-public class Products {
-    ArrayList<Product> products;
+public abstract class Products {
+    private ArrayList<Product> products;
     Products(){
         ArrayList<Product> products =  new ArrayList<>();
         products.add(new Product(1, EnumSet.of(Category.STATIONARY), "Pencil", 5));
@@ -36,10 +36,4 @@ public class Products {
         }
         return product;
     }
-
-    public ArrayList<Product> getAllProducts(){
-        return this.products;
-    }
-
-
 }

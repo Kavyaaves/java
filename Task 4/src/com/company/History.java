@@ -6,15 +6,15 @@ import java.time.LocalDateTime;
 
 public class History {
 
-    ArrayList<Product> products;
-    Double totalBill;
-    String timestamp;
-    String modeOfPayment;
-    Integer id;
+    private ArrayList<Product> products;
+    public Double totalBill;
+    private String timestamp;
+    private String modeOfPayment;
+    private Integer id;
 
-    History(){}
+    public History(){}
 
-    History(Integer orderId, ArrayList<Product> cart, String modeOfPayment, Double totalPaid){
+    public History(Integer orderId, ArrayList<Product> cart, String modeOfPayment, Double totalPaid){
         this.id = orderId;
         this.modeOfPayment = modeOfPayment;
         this.products = cart;

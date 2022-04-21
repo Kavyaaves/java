@@ -23,10 +23,6 @@ public class Product {
         this.quantity = q;
     }
 
-    public Integer getQuantity(){
-        return this.quantity;
-    }
-
     public void displayProduct(Product p){
         System.out.format("%5s%15s%10s%10s%15s\n", p.productId,p.name,p.price, p.quantity != null ? p.quantity : "",  p.quantity != null ? p.quantity*p.price : "");
     }

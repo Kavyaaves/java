@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PostPayment {
-    Integer orderId = 1;
+    public static Integer orderId = 0;
     public void handlePostPayment(Customer currUser, ArrayList<Product> cart, Customers customers, HistoryTable historyTable, String modeOfPayment, Double totalPaid){
         orderId+=1;
         History history = new History(orderId, cart, modeOfPayment, totalPaid);

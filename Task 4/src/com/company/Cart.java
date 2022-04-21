@@ -3,21 +3,27 @@ package com.company;
 import java.util.ArrayList;
 
 public class Cart extends Products{
-    ArrayList<Product> cart;
+    private ArrayList<Product> cart;
 
-    Cart(){
+    public Cart(){
         ArrayList<Product> cart = new ArrayList<>();
         this.cart = cart;
     }
 
     public void addToCart(Integer id, Integer quantity){
         Product p = getProductById(id);
-        if(this.cart.contains(p)){
-            p.setQuantity(p.quantity+ quantity);
+        if(p==null){
+            System.out.println("Product not available for this id.");
         }else{
-            p.setQuantity(quantity);
-            this.cart.add(p);
+            if(this.cart.contains(p)){
+                p.setQuantity(p.quantity+ quantity);
+            }else{
+                p.setQuantity(quantity);
+                this.cart.add(p);
+            }
+            System.out.println("Product added to cart successfully");
         }
+
     }
 
     public ArrayList<Product> getAllCartProducts(){

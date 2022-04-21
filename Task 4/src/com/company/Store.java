@@ -3,6 +3,7 @@ package com.company;
 import java.util.Scanner;
 
 public class Store {
+
     private void init(Scanner sc){
         Customers customers = new Customers();
         customers.createCustomers();

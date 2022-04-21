@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 public class PaymentService{
 
-    ArrayList<Product> cart;
-    Customer currUser;
-    Customers customers;
-    HistoryTable historyTable;
-    Double totalPaid;
+    private ArrayList<Product> cart;
+    private Customer currUser;
+    private Customers customers;
+    private HistoryTable historyTable;
+    private Double totalPaid;
 
     public PaymentService(Cart cart, Customer customer, Customers customers, HistoryTable historyTable, Double totalPaid){
         this.customers = customers;
@@ -18,7 +18,7 @@ public class PaymentService{
         this.cart = cart.getAllCartProducts();
         this.totalPaid = totalPaid;
     }
-   public void pay(PaymentMode paymentMethod){
+    public void pay(PaymentMode paymentMethod){
             paymentMethod.pay(this.totalPaid);
     }
     public void handleCOD(){
@@ -40,7 +40,6 @@ public class PaymentService{
             Scanner sc = new Scanner(System.in);
             System.out.println("Select any one payment method: \n1. Cash on Delivery\n2. UPI\n3. Net Banking\n4. Card\n");
             int option = sc.nextInt();
-//            PaymentMode mode = new PaymentMode();
             switch(option){
                 case 1:
                     handleCOD();

@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HistoryTable {
-    HashMap<Integer, ArrayList<History>> historyTable;
-    Customer customer;
-    ArrayList<History> entries;
+
+    public HashMap<Integer, ArrayList<History>> historyTable;
+
     public HistoryTable(){
         HashMap<Integer, ArrayList<History>> historyTable  = new HashMap<>();
         this.historyTable = historyTable;
@@ -27,25 +27,29 @@ public class HistoryTable {
             this.historyTable.put(cust.custId, newHistory);
         }
     }
-    Double getOverallAmount(ArrayList<History> histories){
+    public Double getOverallAmount(ArrayList<History> histories){
         Double totalAmount = 0.0;
         for(History hist : histories) {
             totalAmount += hist.totalBill;
         }
         return totalAmount;
     }
-    public void displayHistoryTable(){
-        for(Map.Entry<Integer, ArrayList<History>> history: this.historyTable.entrySet()){
-            ArrayList<History> val = history.getValue();
-            Integer key = history.getKey();
-            System.out.println("\n=====================================================================\n");
+    public void displayHistoryTable() {
+        if (this.historyTable.entrySet().size() > 0) {
+            for (Map.Entry<Integer, ArrayList<History>> history : this.historyTable.entrySet()) {
+                ArrayList<History> val = history.getValue();
+                Integer key = history.getKey();
+                System.out.println("\n=====================================================================\n");
 
-            for(History hist : val){
-                History history1 = new History();
-                history1.displayHistory(hist);
+                for (History hist : val) {
+                    History history1 = new History();
+                    history1.displayHistory(hist);
+                }
+                System.out.println("\n=====================================================================\n");
+                System.out.format("\n%25s%15s\n", "Total Amount spent: ", getOverallAmount(val));
             }
-            System.out.println("\n=====================================================================\n");
-            System.out.format("\n%25s%15s\n","Total Amount spent: ", getOverallAmount(val));
+        } else {
+            System.out.println("We haven't received any orders from you.");
         }
     }
 }

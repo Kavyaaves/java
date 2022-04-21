@@ -4,9 +4,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Shop extends Products {
-    Customer currUser;
-    Customers customers;
-    HistoryTable historyTable;
+    private Customer currUser;
+    private Customers customers;
+    private HistoryTable historyTable;
+
     Shop(){}
     Shop(Customer customer, Customers customers, HistoryTable historyTable){
         this.customers = customers;
@@ -26,7 +27,12 @@ public class Shop extends Products {
         try {
             System.out.print("Product ID: ");
             Integer id = sc.nextInt();
-            return id;
+            Product p = getProductById(id);
+            if(p==null){
+                throw new InputMismatchException("Product not available for this id.");
+            }else{
+                return id;
+            }
         }catch (InputMismatchException err){
             System.out.println("Enter a valid product id");
             getProductId(sc);
@@ -46,12 +52,12 @@ public class Shop extends Products {
         }
     }
 
-    public boolean checkCart(Cart cart){
+    private boolean checkCart(Cart cart){
         if(cart.getAllCartProducts().size() > 0) return true;
         return false;
     }
 
-    void shop(Cart cart, Scanner sc){
+    private void shop(Cart cart, Scanner sc){
         System.out.println("1. Add to cart\n2. Remove from cart\n3. View Cart\n4. Checkout\n5. View Orders\n6. View Products\n7. Logout");
         int op = sc.nextInt();
         switch(op){

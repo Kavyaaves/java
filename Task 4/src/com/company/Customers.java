@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Customers {
 
-    ArrayList<Customer> customers;
-    Customer currUser;
+    private ArrayList<Customer> customers;
+    private Customer currUser;
 
-    Customers(){};
+    public Customers(){};
 
     public void createCustomers(){
         ArrayList<Customer> customers = new ArrayList<>();
