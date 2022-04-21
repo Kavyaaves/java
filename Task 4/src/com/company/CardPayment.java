@@ -1,14 +1,13 @@
 package com.company;
 
 public class CardPayment implements PaymentMode {
-
         private String name;
         private String cardNumber;
         private String cvv;
         private String dateOfExpiry;
 
-        public CardPayment(String nm, String ccNum, String cvv, String expiryDate){
-            this.name=nm;
+        public CardPayment(String name, String ccNum, String cvv, String expiryDate){
+            this.name=name;
             this.cardNumber=ccNum;
             this.cvv=cvv;
             this.dateOfExpiry=expiryDate;

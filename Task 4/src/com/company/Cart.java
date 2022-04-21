@@ -1,7 +1,7 @@
 package com.company;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+
 public class Cart extends Products{
     ArrayList<Product> cart;
 
@@ -10,12 +10,12 @@ public class Cart extends Products{
         this.cart = cart;
     }
 
-    public void addToCart(Integer id, Integer q){
+    public void addToCart(Integer id, Integer quantity){
         Product p = getProductById(id);
         if(this.cart.contains(p)){
-            p.setQuantity(p.quantity+ q);
+            p.setQuantity(p.quantity+ quantity);
         }else{
-            p.setQuantity(q);
+            p.setQuantity(quantity);
             this.cart.add(p);
         }
     }
