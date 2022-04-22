@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.EnumSet;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -58,7 +59,7 @@ public class Shop extends Products {
     }
 
     private void shop(Cart cart, Scanner sc){
-        System.out.println("1. Add to cart\n2. Remove from cart\n3. View Cart\n4. Checkout\n5. View Orders\n6. View Products\n7. Logout");
+        System.out.println("1. Add to cart\n2. Remove from cart\n3. View Cart\n4. Checkout\n5. View Orders\n6. View Products\n7. View All Categories\n8. Logout");
         int op = sc.nextInt();
         switch(op){
             case 1:
@@ -98,6 +99,11 @@ public class Shop extends Products {
                 this.shop(cart, sc);
                 break;
             case 7:
+                // static class
+                CategorySet.GetCategory getCategory = new CategorySet.GetCategory();
+                getCategory.displayCategories();
+                break;
+            case 8:
                Store store = new Store();
                store.handleAuth(sc, customers, this.historyTable);
                break;
