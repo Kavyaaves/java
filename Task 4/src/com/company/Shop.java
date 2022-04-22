@@ -1,6 +1,5 @@
 package com.company;
 
-import java.util.EnumSet;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -102,6 +101,7 @@ public class Shop extends Products {
                 // static class
                 CategorySet.GetCategory getCategory = new CategorySet.GetCategory();
                 getCategory.displayCategories();
+                this.shop(cart, sc);
                 break;
             case 8:
                Store store = new Store();
