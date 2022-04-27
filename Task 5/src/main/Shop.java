@@ -1,7 +1,13 @@
-package com.company;
+package main;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import cartService.*;
+import customersHandling.*;
+import history.*;
+import inventory.*;
+import category.CategorySet;
 
 public class Shop extends Products {
     private Customer currUser;
@@ -9,7 +15,17 @@ public class Shop extends Products {
     private HistoryTable historyTable;
 
     Shop(){}
-    Shop(Customer customer, Customers customers, HistoryTable historyTable){
+
+    // Abstract method implementation
+    @Override
+    public void displayProducts(Products products) {
+        System.out.println(products.getAllProducts().size());
+        for(Product p: products.getAllProducts()){
+            p.displayProduct(p);
+        }
+    }
+
+    public Shop(Customer customer, Customers customers, HistoryTable historyTable){
         this.customers = customers;
         this.currUser = customer;
         this.historyTable = historyTable;
@@ -17,7 +33,8 @@ public class Shop extends Products {
 
     public void proceed(Scanner sc){
         System.out.println("\n===========Let's start shopping!!===============\n");
-        this.displayProducts();
+        Products products = new Shop();
+        products.displayProducts(products);
         System.out.println("\n================================================\n");
         Cart cart = new Cart();
         this.shop(cart,sc);
@@ -52,6 +69,16 @@ public class Shop extends Products {
         }
     }
 
+    private void handleCheckout(Cart cart){
+        boolean hasProducts =  checkCart(cart);
+        if(hasProducts) {
+            Checkout checkout = new Checkout();
+            checkout.checkoutBill(currUser, cart, this.customers, this.historyTable);
+        }else{
+            System.out.println("Could not proceed with checkout since your cart is empty");
+        }
+    }
+
     private boolean checkCart(Cart cart){
         if(cart.getAllCartProducts().size() > 0) return true;
         return false;
@@ -74,17 +101,11 @@ public class Shop extends Products {
                 this.shop(cart, sc);
                 break;
             case 3:
-                cart.displayCartProducts();
+                cart.displayProducts();
                 this.shop(cart, sc);
                 break;
             case 4:
-                boolean hasProducts =  checkCart(cart);
-                if(hasProducts) {
-                    Checkout checkout = new Checkout();
-                    checkout.checkoutBill(currUser, cart, this.customers, this.historyTable);
-                }else{
-                    System.out.println("Could not proceed with checkout since your cart is empty");
-                }
+                handleCheckout(cart);
                 this.shop(cart, sc);
                 break;
             case 5:
@@ -93,13 +114,19 @@ public class Shop extends Products {
                 break;
             case 6:
                 System.out.println("\n================================================\n");
-                this.displayProducts();
+                Products products = new Shop();
+                products.displayProducts(products);
                 System.out.println("\n================================================\n");
                 this.shop(cart, sc);
                 break;
             case 7:
                 // static class
                 CategorySet.GetCategory getCategory = new CategorySet.GetCategory();
+
+                // normal class
+//                CategorySet categorySet = new CategorySet();
+//                CategorySet.GetCategory getCategory = categorySet.new GetCategory();
+
                 getCategory.displayCategories();
                 this.shop(cart, sc);
                 break;

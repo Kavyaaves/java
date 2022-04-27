@@ -1,8 +1,11 @@
-package com.company;
+package cartService;
 
 import java.util.ArrayList;
 
+import inventory.*;
+
 public class Cart extends Products{
+
     private ArrayList<Product> cart;
 
     public Cart(){
@@ -12,11 +15,11 @@ public class Cart extends Products{
 
     public void addToCart(Integer id, Integer quantity){
         Product p = getProductById(id);
-        if(p==null){
+        if(p == null){
             System.out.println("Product not available for this id.");
         }else{
             if(this.cart.contains(p)){
-                p.setQuantity(p.quantity+ quantity);
+                p.setQuantity(p.getQuantity()+ quantity);
             }else{
                 p.setQuantity(quantity);
                 this.cart.add(p);
@@ -40,7 +43,15 @@ public class Cart extends Products{
         }
     }
 
-    public void displayCartProducts(){
+    // Abstract method implementation
+    @Override
+    public void displayProducts(Products products) {
+        for(Product p: products.getAllProducts()){
+            p.displayProduct(p);
+        }
+    }
+
+    public void displayProducts(){
         System.out.println("\n==================================================================\n");
         System.out.format("%5s%15s%10s%10s%15s\n", "ID", "NAME", "AMOUNT", "QTY", "TOTAL AMOUNT");
         for(Product p: this.cart){

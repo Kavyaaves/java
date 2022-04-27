@@ -1,6 +1,11 @@
-package com.company;
+package main;
 
 import java.util.Scanner;
+
+import customersHandling.Customer;
+import customersHandling.Customers;
+import details.Details;
+import history.HistoryTable;
 
 public class Store {
 
@@ -11,7 +16,7 @@ public class Store {
         handleAuth(sc, customers, historyTable);
     }
 
-    public void handleAuth(Scanner sc, Customers customers, HistoryTable historyTable){
+    protected void handleAuth(Scanner sc, Customers customers, HistoryTable historyTable){
         System.out.println("Choose\n1. Existing Customer\n2. New Customer\n3. Exit\n");
         int option = sc.nextInt();
         switch(option){
@@ -42,8 +47,8 @@ public class Store {
         proceedWithShopping(customer, sc, customers, historyTable);
     }
 
-    private void proceedWithShopping(Customer cust, Scanner sc, Customers customers, HistoryTable historyTable){
-        Shop shop = new Shop(cust, customers, historyTable);
+    private void proceedWithShopping(Customer customer, Scanner sc, Customers customers, HistoryTable historyTable){
+        Shop shop = new Shop(customer, customers, historyTable);
         shop.proceed(sc);
     }
     public static void main(String args[]){

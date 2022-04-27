@@ -1,7 +1,14 @@
-package com.company;
+package paymentHandling;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import cartService.Cart;
+import customersHandling.Customer;
+import customersHandling.Customers;
+import inventory.Product;
+import history.HistoryTable;
+import inventory.Products;
 
 public class PaymentService{
 
@@ -10,6 +17,7 @@ public class PaymentService{
     private Customers customers;
     private HistoryTable historyTable;
     private Double totalPaid;
+    private Products products;
 
     public PaymentService(Cart cart, Customer customer, Customers customers, HistoryTable historyTable, Double totalPaid){
         this.customers = customers;
@@ -61,7 +69,7 @@ public class PaymentService{
         public void onPaymentSuccessful(String modeOfPayment){
             System.out.println("Order placed successfully. Thank you for shopping with us.\n");
             PostPayment p = new PostPayment();
-            p.handlePostPayment(this.currUser,this.cart, this.customers, this.historyTable, modeOfPayment, this.totalPaid);
+            p.handlePostPayment(this.currUser,this.cart, this.customers, this.historyTable, this.products, modeOfPayment, this.totalPaid);
 
         }
 

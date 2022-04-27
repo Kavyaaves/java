@@ -1,8 +1,10 @@
-package com.company;
+package history;
 
 import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+
+import inventory.Product;
 
 public class History {
 

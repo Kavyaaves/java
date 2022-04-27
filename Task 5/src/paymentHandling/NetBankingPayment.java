@@ -1,6 +1,6 @@
-package com.company;
+package paymentHandling;
 
-    public class NetBankingPayment implements PaymentMode {
+public class NetBankingPayment implements PaymentMode {
 
         private String emailId;
         private String password;

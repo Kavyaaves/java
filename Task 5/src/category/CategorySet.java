@@ -1,8 +1,9 @@
-package com.company;
+package category;
 
 import java.util.EnumSet;
 
 public class CategorySet {
+
     // static nested class
     public static class GetCategory{
         public void displayCategories(){
@@ -10,4 +11,5 @@ public class CategorySet {
             System.out.println(categories);
         }
     }
+
 }

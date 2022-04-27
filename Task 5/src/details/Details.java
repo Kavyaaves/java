@@ -1,8 +1,11 @@
-package com.company;
+package details;
 
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+
+import customersHandling.Customers;
+import customersHandling.Customer;
 
 public class Details {
     public String getNextLine(Scanner sc){
@@ -30,23 +33,23 @@ public class Details {
 
     public Customer getCustDetails(Scanner sc){
         System.out.print("Enter your details:\nName: ");
-        String custName = getNextLine(sc);
+        String customerName = getNextLine(sc);
         System.out.print("Phone Number: ");
         Long phoneNum = getNextLong(sc);
         System.out.print("Address: ");
         String custAddress = getNextLine(sc);
         Random random = new Random();
         int custId = random.nextInt(99999);
-        Customer customer =  new Customer(custId, custName, phoneNum, custAddress);
+        Customer customer =  new Customer(custId, customerName, phoneNum, custAddress);
         return customer;
     }
 
     public Customer getLoginDetails(Scanner sc, Customers c){
         System.out.print("Enter login details:\nName:");
-        String custName = getNextLine(sc);
+        String customerName = getNextLine(sc);
         System.out.print("Phone Number: ");
         Long phoneNum = getNextLong(sc);
-        Customer customer = c.getCustomer(custName, phoneNum);
+        Customer customer = c.getCustomer(customerName, phoneNum);
         if(customer == null){
             System.out.println("Login failed");
             this.getLoginDetails(sc,c);

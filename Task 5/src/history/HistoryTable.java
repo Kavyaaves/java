@@ -1,8 +1,10 @@
-package com.company;
+package history;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import customersHandling.Customer;
 
 public class HistoryTable {
 
@@ -17,14 +19,14 @@ public class HistoryTable {
     }
 
     public void addToHistoryTable(Customer cust, History history){
-        if(this.historyTable.containsKey(cust.custId)){
-            ArrayList<History> existingRecord = this.historyTable.get(cust.custId);
+        if(this.historyTable.containsKey(cust.customerId)){
+            ArrayList<History> existingRecord = this.historyTable.get(cust.customerId);
             existingRecord.add(history);
-            this.historyTable.put(cust.custId, existingRecord);
+            this.historyTable.put(cust.customerId, existingRecord);
         }else{
             ArrayList<History> newHistory = new ArrayList<>();
             newHistory.add(history);
-            this.historyTable.put(cust.custId, newHistory);
+            this.historyTable.put(cust.customerId, newHistory);
         }
     }
     public Double getOverallAmount(ArrayList<History> histories){

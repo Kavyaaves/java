@@ -1,4 +1,4 @@
-package com.company;
+package customersHandling;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ public class Customers {
 
     public Customer getCustomer(String name, Long phoneNum){
         for(Customer c: this.customers){
-            if(c.custName.equals(name) && c.phoneNum.equals(phoneNum)){
+            if(c.customerName.equals(name) && c.phoneNum.equals(phoneNum)){
                 this.currUser = c;
                 break;
             }

@@ -1,4 +1,4 @@
-package com.company;
+package paymentHandling;
 
 public class CardPayment implements PaymentMode {
         private String name;
