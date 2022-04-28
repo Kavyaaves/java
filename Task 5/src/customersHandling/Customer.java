@@ -8,7 +8,7 @@ public class Customer {
 
     public Customer(){}
 
-    public Customer(Integer customerId, String customerName,Long phoneNum,String address){
+    public Customer(Integer customerId, String customerName, Long phoneNum, String address){
         this.customerId = customerId;
         this.customerName = customerName;
         this.phoneNum = phoneNum;

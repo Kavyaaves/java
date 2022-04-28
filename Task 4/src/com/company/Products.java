@@ -1,15 +1,11 @@
-package inventory;
+package com.company;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 
-import category.Category;
-
 public abstract class Products {
-
     private ArrayList<Product> products;
-
-    public Products(){
+    Products(){
         ArrayList<Product> products =  new ArrayList<>();
         products.add(new Product(1, EnumSet.of(Category.STATIONARY), "Pencil", 5));
         products.add(new Product(2, EnumSet.of(Category.ELECTRONICS), "Speaker", 500));
@@ -24,16 +20,16 @@ public abstract class Products {
         this.products = products;
     }
 
-    // abstract method
-    public abstract void displayProducts(Products products);
-
-    public ArrayList<Product> getAllProducts(){
-        return products;
+    public void displayProducts(){
+        for(Product p:this.products){
+            p.displayProduct(p);
+        }
     }
+
     public Product getProductById(Integer id){
         Product product = null;
         for(Product p: this.products){
-            if(p.getProductId().equals(id)){
+            if(p.productId.equals(id)){
                 product = p;
             }
         }

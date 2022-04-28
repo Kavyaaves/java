@@ -1,31 +1,30 @@
-package history;
+package com.company;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import customersHandling.Customer;
 
 public class HistoryTable {
 
     public HashMap<Integer, ArrayList<History>> historyTable;
 
     public HistoryTable(){
-        this.historyTable = new HashMap<>();
+        HashMap<Integer, ArrayList<History>> historyTable  = new HashMap<>();
+        this.historyTable = historyTable;
     }
     public HashMap<Integer, ArrayList<History>> getHistoryTable(){
         return this.historyTable;
     }
 
     public void addToHistoryTable(Customer cust, History history){
-        if(this.historyTable.containsKey(cust.customerId)){
-            ArrayList<History> existingRecord = this.historyTable.get(cust.customerId);
+        if(this.historyTable.containsKey(cust.custId)){
+            ArrayList<History> existingRecord = this.historyTable.get(cust.custId);
             existingRecord.add(history);
-            this.historyTable.put(cust.customerId, existingRecord);
+            this.historyTable.put(cust.custId, existingRecord);
         }else{
             ArrayList<History> newHistory = new ArrayList<>();
             newHistory.add(history);
-            this.historyTable.put(cust.customerId, newHistory);
+            this.historyTable.put(cust.custId, newHistory);
         }
     }
     public Double getOverallAmount(ArrayList<History> histories){

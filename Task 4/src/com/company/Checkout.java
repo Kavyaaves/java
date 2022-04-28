@@ -1,13 +1,7 @@
-package cartService;
+package com.company;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import customersHandling.*;
-import category.Category;
-import history.HistoryTable;
-import inventory.Product;
-import paymentHandling.PaymentService;
 
 public class Checkout extends Cart  {
 
@@ -28,8 +22,8 @@ public class Checkout extends Cart  {
     public Double calculateTax(){
             double amount = 0.0;
             for(Product p: this.cart){
-                for(Category category : p.getCategory()){
-                    amount+=((category.getTax())*p.getPrice());
+                for(Category category : p.category){
+                    amount+=((category.getTax())*p.price);
                 }
             }
             return amount;
@@ -58,8 +52,9 @@ public class Checkout extends Cart  {
     }
 
     public void generateBill(Cart cart){
+
         Scanner sc = new Scanner(System.in);
-        cart.displayProducts();
+        cart.displayCartProducts();
 
         displayAmountBill();
         System.out.println("\nAre you sure you want to proceed with this amount?\n1. Yes\n2. No");
@@ -67,7 +62,7 @@ public class Checkout extends Cart  {
         if(option == 2){
             return;
         }else if(option == 1){
-            PaymentService paymentService = new PaymentService(cart, currUser, this.customers, historyTable, this.totalPaid);
+            PaymentService paymentService = new PaymentService(cart, currUser,this.customers, historyTable, this.totalPaid);
             paymentService.paymentMode();
         }
     }
@@ -75,7 +70,7 @@ public class Checkout extends Cart  {
     public Double calculateAmount() {
         Double amount = 0.0;
         for (Product p : this.cart) {
-            amount += (p.getPrice() * p.getQuantity());
+            amount += (p.price * p.quantity);
         }
         return amount;
     }

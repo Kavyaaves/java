@@ -1,4 +1,4 @@
-package details;
+package controllers;
 
 import java.util.InputMismatchException;
 import java.util.Random;
@@ -7,12 +7,11 @@ import java.util.Scanner;
 import customersHandling.Customers;
 import customersHandling.Customer;
 
-public class Details {
+public class UserInputController {
 
     public String getNextLine(Scanner sc){
         try {
-            String str = sc.next();
-            return str;
+            return sc.nextLine();
         }catch (InputMismatchException err){
             System.out.println("Please enter a valid input");
             getNextLine(sc);
@@ -20,10 +19,11 @@ public class Details {
         }
     }
 
-    public Long getNextLong(Scanner sc){
-        Long getNum = Long.valueOf(0);
+    public long getNextLong(Scanner sc){
+        long getNum = 0;
         try {
             getNum = sc.nextLong();
+            sc.nextLine();
         }catch (InputMismatchException err){
             System.out.println("Please enter a valid input");
             sc.nextLine();
@@ -32,28 +32,28 @@ public class Details {
         return getNum;
     }
 
-    public Customer getCustDetails(Scanner sc){
+    public Customer getCustomerDetails(Scanner sc){
         System.out.print("Enter your details:\nName: ");
         String customerName = getNextLine(sc);
         System.out.print("Phone Number: ");
-        Long phoneNum = getNextLong(sc);
+        long phoneNum = getNextLong(sc);
         System.out.print("Address: ");
-        String custAddress = getNextLine(sc);
+        String customerAddress = getNextLine(sc);
         Random random = new Random();
-        int custId = random.nextInt(99999);
-        Customer customer =  new Customer(custId, customerName, phoneNum, custAddress);
-        return customer;
+        int customerId = random.nextInt(99999);
+        return new Customer(customerId, customerName, phoneNum, customerAddress);
     }
 
-    public Customer getLoginDetails(Scanner sc, Customers c){
+    public Customer getLoginDetails(Scanner sc){
+        Customers customers = Customers.getInstance();
         System.out.print("Enter login details:\nName:");
         String customerName = getNextLine(sc);
         System.out.print("Phone Number: ");
-        Long phoneNum = getNextLong(sc);
-        Customer customer = c.getCustomer(customerName, phoneNum);
+        long phoneNum = getNextLong(sc);
+        Customer customer = customers.getCustomer(customerName, phoneNum);
         if(customer == null){
             System.out.println("Login failed");
-            this.getLoginDetails(sc,c);
+            this.getLoginDetails(sc);
             return null;
         }else{
             return customer;

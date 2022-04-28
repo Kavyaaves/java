@@ -1,16 +1,14 @@
-package inventory;
+package database;
+
+import category.Category;
+import inventory.Product;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 
-import category.Category;
-
-public abstract class Products {
-
-    private ArrayList<Product> products;
-
-    public Products(){
-        ArrayList<Product> products =  new ArrayList<>();
+public class ProductsTable {
+    private final ArrayList<Product> products = new ArrayList<>();
+    public ArrayList<Product> getProducts(){
         products.add(new Product(1, EnumSet.of(Category.STATIONARY), "Pencil", 5));
         products.add(new Product(2, EnumSet.of(Category.ELECTRONICS), "Speaker", 500));
         products.add(new Product(3, EnumSet.of(Category.STATIONARY), "Pen", 50));
@@ -21,22 +19,6 @@ public abstract class Products {
         products.add(new Product(8,  EnumSet.of(Category.ELECTRONICS), "Scratch Card", 350));
         products.add(new Product(9,  EnumSet.of(Category.ELECTRONICS), "Phone Cover", 500));
         products.add(new Product(10, EnumSet.of(Category.SNACKS, Category.FOOD), "Chocolate", 20));
-        this.products = products;
-    }
-
-    // abstract method
-    public abstract void displayProducts(Products products);
-
-    public ArrayList<Product> getAllProducts(){
         return products;
-    }
-    public Product getProductById(Integer id){
-        Product product = null;
-        for(Product p: this.products){
-            if(p.getProductId().equals(id)){
-                product = p;
-            }
-        }
-        return product;
     }
 }
